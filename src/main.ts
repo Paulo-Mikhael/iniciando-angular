@@ -3,5 +3,5 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { TabelaComponent } from './app/tabela/tabela.component';
 
-bootstrapApplication(TabelaComponent, appConfig)
+bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

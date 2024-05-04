@@ -1,19 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { LISTATAREFAS } from './base-tarefa';
 import { TarefaService } from './tarefa.service';
 import { Tarefa } from './tarefa';
 
 @Component({
   selector: 'app-tabela',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
   templateUrl: './tabela.component.html',
   styleUrl: './tabela.component.css'
 })
