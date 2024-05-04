@@ -1,0 +1,127 @@
+<div class="center">
+    <h1>{{title}}</h1>
+</div>
+<div>
+    <table class="main-table center">
+        <thead>
+            <tr class="head">
+                <td>
+                    Index
+                </td>
+                <td>
+                    Id
+                </td>
+                <td>
+                    Nome
+                </td>
+                <td>
+                    Descrição
+                </td>
+                <td>
+                    Quantidade em estoque
+                </td>
+                <td>
+                    Quantidade mínima
+                </td>
+                <td>
+                    Precisa comprar
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tarefa of tarefas; let i = index; let par = even; let impar = odd; let primeiro = first; let ultimo = last;"
+            [ngClass]="{'par-cor':par, 'impar-cor':impar}" [ngSwitch]="true">
+                <td>
+                    {{i}}
+                </td>
+                <td>
+                    {{tarefa.id}}
+                </td>
+                <td>
+                    {{tarefa.nome}}
+                </td>
+                <td>
+                    {{tarefa.descricao}}
+                </td>
+                <td>
+                    {{tarefa.quantidadeEstoque}}
+                </td>
+                <td>
+                    {{tarefa.quantidadeMinima}}
+                </td>
+                <td>
+                    <span *ngSwitchCase="tarefa.quantidadeEstoque < tarefa.quantidadeMinima">
+                        Sim
+                    </span>
+                    <span *ngSwitchCase="tarefa.quantidadeEstoque == tarefa.quantidadeMinima">
+                        Ficar atento
+                    </span>
+                    <span *ngSwitchCase="tarefa.quantidadeEstoque > tarefa.quantidadeMinima">
+                        Não
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="input-container center">
+    <p>ID:</p>
+    <input type="text" name="id" [(ngModel)]="novaTarefa.id" required minlength="2" #validId="ngModel">
+    <span *ngIf="!validId.valid">
+        <div *ngIf="validId.errors?.['required']">
+            Campo obrigatório
+        </div>
+        <div *ngIf="validId.errors?.['minlength']">
+            Necessário pelo menos dois caracteres
+        </div>
+    </span>
+
+    <p>Nome</p>
+    <input type="text" name="nome" [(ngModel)]="novaTarefa.nome" required minlength="2" #validName="ngModel">
+    <span *ngIf="!validName.valid">
+        <div *ngIf="validName.errors?.['required']">
+            Campo obrigatório
+        </div>
+        <div *ngIf="validName.errors?.['minlength']">
+            Necessário pelo menos dois caracteres
+        </div>
+    </span>
+
+    <p>Descrição</p>
+    <input type="text" name="descricao" [(ngModel)]="novaTarefa.descricao" required minlength="2" #validDescription="ngModel">
+    <span *ngIf="!validDescription.valid">
+        <div *ngIf="validDescription.errors?.['required']">
+            Campo obrigatório
+        </div>
+        <div *ngIf="validDescription.errors?.['minlength']">
+            Necessário pelo menos dois caracteres
+        </div>
+    </span>
+
+    <p>Quantidade em estoque</p>
+    <input type="text" name="quantidadeEstoque" [(ngModel)]="novaTarefa.quantidadeEstoque" required minlength="2" #validStockQuantity="ngModel">
+    <span *ngIf="!validStockQuantity.valid">
+        <div *ngIf="validStockQuantity.errors?.['required']">
+            Campo obrigatório
+        </div>
+        <div *ngIf="validStockQuantity.errors?.['minlength']">
+            Necessário pelo menos dois caracteres
+        </div>
+    </span>
+
+    <p>Quantidade minima</p>
+    <input type="text" name="quantidadeMinima" [(ngModel)]="novaTarefa.quantidadeMinima" required minlength="2" #validMinimalQuantity="ngModel">
+    <span *ngIf="!validMinimalQuantity.valid">
+        <div *ngIf="validMinimalQuantity.errors?.['required']">
+            Campo obrigatório
+        </div>
+        <div *ngIf="validMinimalQuantity.errors?.['minlength']">
+            Necessário pelo menos dois caracteres
+        </div>
+    </span>
+
+    <button [disabled]="!validId.valid || !validDescription.valid || !validName.valid || !validStockQuantity.valid || 
+    !validMinimalQuantity.valid" (click)="focaInput()">
+        TESTE
+    </button>
+</div>
